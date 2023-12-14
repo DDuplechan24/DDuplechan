@@ -10,7 +10,7 @@ var init = function (window) {
         fps = draw.fps('#000');
         
     
-    window.opspark.makeGame = function() {
+        window.opspark.makeGame = function() {
         
         window.opspark.game = {};
         var game = window.opspark.game;
@@ -106,7 +106,7 @@ var init = function (window) {
 
             // YOUR TODO 6 CODE ENDS HERE //////////////////////////
         
-        
+        }
         /////////////////////////////////////////////////////////////
         // --- NO CODE BELOW HERE  --- DO NOT REMOVE THIS CODE --- //
         /////////////////////////////////////////////////////////////
@@ -120,7 +120,7 @@ var init = function (window) {
         game.update = update;
         
         app.addUpdateable(window.opspark.game);
-        }
+        
 };
 
 // DON'T REMOVE THIS CODE //////////////////////////////////////////////////////
