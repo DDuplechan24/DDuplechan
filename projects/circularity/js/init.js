@@ -52,15 +52,27 @@ var init = function (window) {
         */
         function update() {
             // TODO 4 : Update the circle's position //
-            physikz.updatePosition( circle ); {
-                circlesArray[0]
-                circlesArray[1]
-            }
-            
+            physikz.updatePosition(circles[0]);
+            physikz.updatePosition(circles[1]);
+            physikz.updatePosition(circles[2]);
+            physikz.updatePosition(circles[3]);
+            physikz.updatePosition(circles[4]);
+
             // TODO 5 / 10 : Call game.checkCirclePosition() on your circles.
-            for (var i = 0; i < myArray.length; i++) {
+            canvas.width
+            canvas.height
+
+            circle.x
+            circle.y
+            circle.radius
+            for (var i = 0; i < circles.length; i++) {
                 game.checkCirclePosition(circles[i]);
-            }            
+                physikz.updatePosition(circles[i]);
+            }           
+            
+            if( circle.x > canvas.width + circle.radius) {
+                circle.x = 0 - circle.radius;
+            }
         }
 
             // TODO 9 : Iterate over the array
