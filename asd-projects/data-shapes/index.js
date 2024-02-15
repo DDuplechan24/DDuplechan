@@ -43,30 +43,40 @@ $(document).ready(function () {
     shape: "circle",
     repeat: 3,
   };
-  dataShapes.add(shape);
+  dataShapes.push(shape)
   // TODO 2: add a new property to all data shapes
-  for (i = 0 ; i < 9 ; i++) {
-    dataShapes.add(goodBehavior)
-    var currentShape = dataShapes()
-  }
+  for (i = 0 ; i < dataShapes.length ; i++) {
+    
+    var currentShape = dataShapes
+    if (currentIndex.color === "red"){
+      currentShape.goodBehavior = "bounce"
+    }
+
+    if (currentIndex.color === "blue"){
+      currentShape.goodBehavior = "blink"
+    }else currentShape.goodBehavior = "spin"
+  };
 
   // TODO 3-a: add a function that handles the static display type
   function handleStatic(data) {
-    setBackgroundWithObject(data)
+    setBackgroundWithObject(data);
     animationDetails.displayType(1)
   }
 
   // TODO 4-a: add a function that handles the good display type
-  function handleGood(color,shape,repeat){
+  function handleGood(color,shape,repeat) {
     setBackgroundWithSimple()
     animationDetails.displayType(2)
+    color = colors
+    shape = shapes
+    repeat = repeats
   }
 
   // TODO 5-a: add a function that handles the bad display type
   function handleBad(data,repeat){
-    repeat + 1
-    setBackgroundWithMixed(data,repeat)
-    animationDetails.displayType(3)
+    repeat = repeat + 1
+    setBackgroundWithMixed(data,repeat);
+    animationDetails.displayType(3);
   }
 
   /////////////////////////////////////////////////
@@ -75,18 +85,18 @@ $(document).ready(function () {
 
   function staticDisplay() {
     // TODO 3-b: call your handleStatic function
-    handleStatic()
+    handleStatic();
   }
 
   function goodDisplay() {
     // TODO 4-b: call your handleGood function
-    var currentShape = dataShape.currentIndex
-    handleGood()
+    currentShape = dataShapes.currentIndex()
+    handleGood();
   }
 
   function badDisplay() {
     // TODO 5-b: call your handleBad function
-    handleBad()
+    handleBad();
   }
 
   /////////////////////////////////////////////////
