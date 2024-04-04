@@ -11,15 +11,15 @@ function runProgram(){
   var FRAME_RATE = 60;
   var FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
   var KEY = {
-    ENTER1: "LEFT",
-    ENTER2: "RIGHT",
-    ENTER3: "UP",
-    ENTER4: "DOWN",
+    LEFT: 13,
+    RIGHT: 13,
+    UP: 13,
+    DOWN: 13,
   };
   // Game Item Objects
   var walker = {
-    XCOORDINATE : 0,
-    YCOORDINATE : 0,
+    XPOSITION : 0,
+    YPOSITION : 0,
     XSPEED : 0,
     YSPEED : 0,
   }
@@ -47,17 +47,17 @@ function runProgram(){
   Called in response to events.
   */
   function handleKeyDown(event) {
-    if (event.which === KEY.ENTER1) {
-      event = KEY.ENTER1
+    if (event.which === KEY.LEFT) {
+      event = KEY.LEFT
       walker.XSPEED = -5;
-    }else if (event.which === KEY.ENTER2) {
-      event = KEY.ENTER2
+    }else if (event.which === KEY.RIGHT) {
+      event = KEY.RIGHT
       walker.XSPEED = 5;
-    }else if (event.which === KEY.ENTER3){
-      event = ENTER3
+    }else if (event.which === KEY.UP){
+      event = KEY.UP
       walker.YSPEED = 5;
-    }else if (event.which === KEY.ENTER4) {
-      event = ENTER4
+    }else if (event.which === KEY.DOWN) {
+      event = KEY.DOWN
       walker.YSPEED = -5;
     }
     console.log(event);
