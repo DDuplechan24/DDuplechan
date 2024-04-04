@@ -104,16 +104,24 @@ function checkForNewDirection(event) {//doesn't work
 
  if (activeKey === KEY.LEFT) {
    snake.head.direction = "left";
-   console.log(snake.head.direction);
+   console.log(snake.head.column - 1);
  }
 
 
  else if (activeKey === KEY.RIGHT){
    snake.head.direction = "right";
-   console.log(snake.head.direction);
+   console.log(snake.head.column + 1);
  }
   
+ if (activeKey === KEY.UP) {
+  snake.head.dirction = "up";
+  console.log(snake.head.row + 1)
+ }
 
+ else if (activeKey === KEY.DOWN) {
+  snake.head.direction = "down";
+  console.log(snake.head.row - 1)
+ }
   
 }
 
@@ -127,12 +135,12 @@ function moveSnake() {
   column/row properties. 
   
   */
-  for (i = 0; i = snake.body.length ; i++) {
-    var snakeSquare = "???";
-    var nextSnakeSquare = "???";// doesn't work
-    var nextRow = "???";
-    var nextColumn = "???";
-    var nextDirection = "???";
+  for (var i = snake.body.length - 1; i > 0; i++) {
+    var snakeSquare = snake.body[i];
+    var nextSnakeSquare = snake.body[i-1];
+    var nextRow = snakeSquare.row;
+    var nextColumn = snakeSquare.column;
+    var nextDirection = snakeSquare.direction;
 
     snakeSquare.direction = nextDirection;
     snakeSquare.row = nextRow;
@@ -180,12 +188,20 @@ function hasHitWall() {
   HINT: What will the row and column of the snake's head be if this were the case?
   */
   
-  if (snake.hasHitWall() === true) {
-    return true
+  if (snake.head.row < 0){
+    return true;
   }
-
-  if (snake.hasHitWall() === false) {
-    return false
+  else if (snake.head.row > ROWS){
+    return true;
+  }
+  else if (snake.head.column < 0){
+    return true;
+  }
+  else if (snake.head.column > COLUMNS){
+    return true;
+  }
+  else {
+    return false;
   }
 
   ROWS; //the total number of ROWS in the board
@@ -193,7 +209,6 @@ function hasHitWall() {
   snake.head.row; //the current row of snake.head
   snake.head.column; //the current column of snake.head
 
-  return false;
 }
 
 function hasCollidedWithApple() {
@@ -205,11 +220,18 @@ function hasCollidedWithApple() {
   HINT: Both the apple and the snake's head are aware of their own row and column
   */
 
+  if (apple.row === snake.head.row && apple.column === snake.head.column) {
+    return true;
+  }
+  else {
+    return false;
+  }
+
   apple.row; // the current row of the apple
   apple.column; // the current column of the apple
   snake.head.row; // the current row of snake.head
   snake.head.column;// the current column of snake.head
-  return false;
+  
 }
 
 function handleAppleCollision() {
@@ -230,8 +252,22 @@ function handleAppleCollision() {
   If the tail is moving "down", place the next snakeSquare above it.
   etc...
   */
-  var row = 0;
-  var column = 0;
+  var row = snake.tail.row = 0;
+  var column = snake.tail.column + 0;
+
+  if(snake.tail.direction === "right") {
+    column = snake.tail.column - 1;
+  }
+
+  else if (snake.tail.direction === "left"){
+    column = snake.tail.column + 1;
+  }
+  else if(snake.tail.direction === "up"){
+    row = snake.tail.row - 1;
+  }
+  else if(snake.tail.direction === "down"){
+    row = snake.tail.row + 1;
+  }
 
   // increase the score and update the score DOM element
   score++;
@@ -255,7 +291,13 @@ function hasCollidedWithSnake() {
   head and each part of the snake's body also knows its own row and column.
   
   */
-  
+  for (q = 1; q < snake.body.length; q++){
+    if (snake.head.row === snake.body[q].row && snake.head.column === snake.body[q].column){
+      return true
+    }
+  }
+
+
   return false;
 }
 
@@ -371,6 +413,11 @@ function getRandomAvailablePosition() {
     randomPosition.row = Math.floor(Math.random() * ROWS);
     spaceIsAvailable = true;
 
+    for (p = 0; p < snake.body.length; p++){
+      if (randomPosition.column === snake[p].column && randomPosition.row === snake.body[p].row){
+        spaceIsAvailable = false;
+      }
+    }
     /*
     TODO 13: After generating the random position determine if that position is
     not occupied by a snakeSquare in the snake's body. If it is then set 
@@ -380,10 +427,11 @@ function getRandomAvailablePosition() {
     if (apple = hasCollidedWithSnake){
       spaceIsAvailable = false;
     }
+  return randomPosition;
+  }
   }
 
-  return randomPosition;
-}
+
 
 function calculateHighScore() {
   // retrieve the high score from session storage if it exists, or set it to 0
