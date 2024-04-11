@@ -48,13 +48,13 @@ function runProgram(){
   */
   function handleKeyDown(event) {
     if (event.which === KEY.ARROWLEFT) {
-      walker.XSPEED = -5;
+      walker.XSPEED = 5;
     }else if (event.which === KEY.ARROWRIGHT) {
       walker.XSPEED = 5;
     }else if (event.which === KEY.ARROWUP){
       walker.YSPEED = 5;
     }else if (event.which === KEY.ARROWDOWN) {
-      walker.YSPEED = -5;
+      walker.YSPEED = 5;
     }
     console.log(event);
   }
@@ -69,9 +69,8 @@ function runProgram(){
   }
   
   function redrawGameItem() {
-    $("#walker").css(handleKeyDown, walker.XPOSITION);
+    $("#walker").css("bottom", walker.YPOSITION);
     $("#walker").css("top", walker.YPOSITION);
-    $("#walker").css(handleKeyDown, walker.YPOSITION);
   }
   
   function endGame() {
