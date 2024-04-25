@@ -20,7 +20,7 @@ function resetAndRender() {
 // all of your apply functions
 function applyAndRender() {
   // Multiple TODOs: Call your apply function(s) here
-  applyFilter(reddify)
+  applyFilter(rediffy)
   applyFilterNoBackground(decreaseBlue)
   applyFilterNoBackground(increaseGreenByBlue)
   // do not change the below line of code
@@ -33,28 +33,28 @@ function applyAndRender() {
 
 // TODO 1, 2 & 4: Create the applyFilter function here
 function applyFilter(filterFunction) {
-  filterFunction(rgbNumbers)
-  rgbNumbers[RED] = 255
   for (var i = 0; i < image.length; i++){
     for (var j = 0; j < image[i].length; j++) {
       var rgbString = image[i][j];
-      rgbNumbers = rgbStringToArray(rgbString)
-      rgbString = rgbArrayToString(rgbNumbers)
+      var rgbNumber = rgbStringToArray(rgbString)
+      filterFunction(rgbNumber)
+      rgbString = rgbArrayToString(rgbNumber)
       image[i][j] = rgbString
     }
   }
 }
 
 // TODO 7: Create the applyFilterNoBackground function
-function applyFilterNoBackground(backgroundColor){
-  backgroundColor = keepInBounds(number);
-  filterFunction(rgbNumbers)
+function applyFilterNoBackground(filterFunction){
   for (var i = 0; i < image.length; i++){
     for (var j = 0; j < image[i].length; j++) {
-      var rgbString = image[i][j]
+      var rgbString = image[i][j];
+      var backgroundColor = image[0][0]
+      if (rgbString !== backgroundColor) {
+        var rgbNumber = rgbStringToArray(rgbString)
+      filterFunction(rgbNumber)
+      rgbString = rgbArrayToString(rgbNumber)
       image[i][j] = rgbString
-      if (backgroundColor !== keepInBounds(number)) {
-        applyFilter();
       }
     }
   }
@@ -62,27 +62,25 @@ function applyFilterNoBackground(backgroundColor){
 
 // TODO 5: Create the keepInBounds function
 function keepInBounds(number) {
-  if (number < 0) {
-    number = 0
-  }else if (number > 255) {
-    number = 255
-  }else{ number = number}
-
-  return number
+  return number < 0 ? 0
+  : number > 255 ? 255
+  : number
 }
 
 // TODO 3: Create reddify function
 function rediffy(array) {
-  rgbNumbers[RED] = 200
+  array[RED] = 200
 }
 
 // TODO 6: Create more filter functions
-function decreaseBlue(list) {
-  BLUE = keepInBounds(BLUE - 50);
+function decreaseBlue(array) {
+  array[BLUE] -= 50;
+  keepInBounds(array[BLUE])
 }
 
-function increaseGreenByBlue(arrayGreenToBlue) {
-  GREEN = keepInBounds(BLUE + GREEN);
+function increaseGreenByBlue(array) {
+  array[GREEN] += array[BLUE]
+  keepInBounds(array[GREEN])
 }
 
 // CHALLENGE code goes below here
