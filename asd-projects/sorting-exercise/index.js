@@ -31,10 +31,10 @@ async function quickSort( array, left, right) {
     if (right - left > 0){
         index = partition(array, left, right)
         if (left < index - 1) {
-            quickSort(array, left, index - 1)
+            await quickSort(array, left, index - 1)
         }
         if (index < right) {
-            quickSort(array, index, right)
+            await quickSort(array, index, right)
         }
     }
 
