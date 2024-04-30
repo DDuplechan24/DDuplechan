@@ -52,6 +52,8 @@ async function partition(array, left, right) {
         }
         if (left < right) {
             swap(array, left, right)
+            updateCounter(quickCounter);
+            await sleep();
         }
     }
     return left + 1
