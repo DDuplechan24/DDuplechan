@@ -47,7 +47,7 @@ async function partition(array, left, right) {
         while (pivot > array[left].value) {
             left++
         }
-        while (pivot > array[right].value) {
+        while (pivot < array[right].value) {
             right--
         }
         if (left < right) {
